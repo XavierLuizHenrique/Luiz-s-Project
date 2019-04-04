@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+
 import { MyApp } from './app.component';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
-import { FilmeService } from '../services/filme.service';
-import { ClienteService } from '../services/cliente.service';
-import { EnderecoService } from '../services/endereco.service';
+import { firebaseConfig } from '../config/firebase.config';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { EnderecoService } from '../services/endereco.service';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -28,9 +32,7 @@ import { EnderecoService } from '../services/endereco.service';
   providers: [
     StatusBar,
     SplashScreen,
-    FilmeService,
-    ClienteService,
-    EnderecoService,
+    AngularFireAuth,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
